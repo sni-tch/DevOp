@@ -1,13 +1,13 @@
 all: class
 
 class: main.o class.o
-	g++ -o class main.o Class.o
+	x86_64-linux-gnu-g++ -o class main.o Class.o
 
 main.o: main.cpp
-	g++ -g -Wall -c main.cpp
+	x86_64-linux-gnu-g++ -g -Wall -c main.cpp
 
 class.o: Class.cpp Class_H.h
-	g++ -g -Wall -c Class.cpp
+	x86_64-linux-gnu-g++ -g -Wall -c Class.cpp
 
 clean:
 	rm -rf *.o *.elf
