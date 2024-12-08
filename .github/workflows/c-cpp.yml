@@ -16,7 +16,7 @@ jobs:
       
       
       - name: set up gcc
-        run: sudo apt-get install g++ 
+        run: sudo apt-get install g++-x86-64-linux-gnu
       
       - name: build 
         run: make
