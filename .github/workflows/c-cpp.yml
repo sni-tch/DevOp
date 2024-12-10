@@ -11,15 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout code
-        uses: actions/checkout@v2
-      
-      
+      # Клонуємо репозиторій
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Встановлюємо залежності (опціонально, якщо вони потрібні)
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential
+
       - name: set up gcc
         run: sudo apt-get install g++ 
-      
-      - name: build 
-        run: make
-        
-      - name: run tests in any
+
+      # Збілдимо проект
+      - name: Build project
+        run: |
+          make clean
+          make
+
+      # Запустимо бінарник
+      - name: Run binary
         run: ./class
