@@ -1,25 +1,31 @@
-name: C/C++ CI
-
+name: Make Tarball
 on:
   push:
-    branches: 
-      - branchMake
-
-
+    branches: ["branchAutomake"]
+  pull_request:
+    branches: ["branchAutomake"]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v2
-      
-      
-      - name: set up gcc
-        run: sudo apt-get install g++ 
-      
-      - name: build 
-        run: make
-        
-      - name: run tests in any
-        run: ./class
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential autoconf automake make g++
+      - name: Generate config scripts
+        run: |
+          aclocal
+          autoconf
+          automake --add-missing
+      - name: Build, configure, and create tarball
+        run: |
+          ./configure
+          make
+          make dist
+      - name: Upload tarball
+        uses: actions/upload-artifact@v3
+        with:
+          name: program-tarball
+          path: program-*.tar.gz
