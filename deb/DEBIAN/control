@@ -1,0 +1,7 @@
+Package: program
+Version: 1.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: Your Name <valera.erohovv@gmail.com>
+Description: A short description of the package
