@@ -1,7 +1,8 @@
 AUTOMAKE_OPTIONS = foreign
 bin_PROGRAMS = program
 program_SOURCES = main.cpp Class.cpp Class_H.h
-
+check_PROGRAMS = test
+test_SOURCES = test.cpp Class.cpp
 PACKAGE = program
 VERSION = 1.0
 PACKAGE_BUGREPORT = valera.erohovv@gmail.com
@@ -21,3 +22,6 @@ debug:
 	@echo "${PACKAGE}"
 	@echo "${VERSION}"
 	@echo "${PACKAGE_BUGREPORT}"
+
+check: test
+    @./test
