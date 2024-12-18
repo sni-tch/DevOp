@@ -21,7 +21,8 @@ jobs:
       - name: Build
         run: |
           autoreconf -i
-          gmake
+          ./configure --disable-dependency-tracking
+          make
 
       - name: Tests
-        run: gmake check
+        run: make check
