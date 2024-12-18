@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: |
           autoreconf -i
-          make
+          gmake
 
       - name: Tests
-        run: make check
+        run: gmake check
