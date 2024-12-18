@@ -16,9 +16,13 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libgtest-dev automake autoconf
-          sudo apt-get install -y gmake
-          sudo ln -s /usr/bin/make /usr/bin/gmake
+          sudo apt-get install -y build-essential libgtest-dev autoconf automake libtool
+
+      - name: Update autotools
+        run: |
+          autoconf --version
+          automake --version
+          libtool --version
 
       - name: Generate configure script
         run: |
@@ -26,23 +30,19 @@ jobs:
 
       - name: Configure project
         run: |
-          ./configure --disable-dependency-tracking
+          ./configure --disable-dependency-tracking || { echo "Configure failed"; exit 1; }
 
       - name: Build
         run: |
-          make
+          make || { echo "Build failed"; exit 1; }
 
       - name: Run Tests
         run: |
           make check || { echo "Tests failed"; exit 1; }
 
-      - name: Display config.log if configure fails
+      - name: Show config.log on failure
         if: failure()
         run: |
-          if [ -f config.log ]; then
-            echo "------ BEGIN config.log ------"
-            cat config.log
-            echo "------ END config.log ------"
-          else
-            echo "config.log not found"
-          fi
+          echo "------ BEGIN config.log ------"
+          cat config.log || echo "config.log not found"
+          echo "------ END config.log ------"
