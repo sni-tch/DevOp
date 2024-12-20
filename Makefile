@@ -102,7 +102,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_program_OBJECTS = main.$(OBJEXT) Class.$(OBJEXT)
+am_program_OBJECTS = main.$(OBJEXT) Class.$(OBJEXT) \
+	HTTPserver_f.$(OBJEXT)
 program_OBJECTS = $(am_program_OBJECTS)
 program_LDADD = $(LDADD)
 am_test_OBJECTS = test.$(OBJEXT) Class.$(OBJEXT)
@@ -123,8 +124,8 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/Class.Po ./$(DEPDIR)/main.Po \
-	./$(DEPDIR)/test.Po
+am__depfiles_remade = ./$(DEPDIR)/Class.Po ./$(DEPDIR)/HTTPserver_f.Po \
+	./$(DEPDIR)/main.Po ./$(DEPDIR)/test.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -295,7 +296,7 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
-program_SOURCES = main.cpp Class.cpp Class_H.h
+program_SOURCES = main.cpp Class.cpp Class_H.h HTTPserver_f.cpp
 test_SOURCES = test.cpp Class.cpp
 CTRLF_DIR = $(CURDIR)/debian
 CTRLF_NAME = $(CTRLF_DIR)/control
@@ -397,6 +398,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/Class.Po # am--include-marker
+include ./$(DEPDIR)/HTTPserver_f.Po # am--include-marker
 include ./$(DEPDIR)/main.Po # am--include-marker
 include ./$(DEPDIR)/test.Po # am--include-marker
 
@@ -696,6 +698,7 @@ clean-am: clean-binPROGRAMS clean-checkPROGRAMS clean-generic \
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 		-rm -f ./$(DEPDIR)/Class.Po
+	-rm -f ./$(DEPDIR)/HTTPserver_f.Po
 	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f ./$(DEPDIR)/test.Po
 	-rm -f Makefile
@@ -746,6 +749,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
 		-rm -f ./$(DEPDIR)/Class.Po
+	-rm -f ./$(DEPDIR)/HTTPserver_f.Po
 	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f ./$(DEPDIR)/test.Po
 	-rm -f Makefile
